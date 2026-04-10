@@ -319,6 +319,7 @@ else if (d.rates) { Object.assign(r, d.rates); }
 async function loadGold() {
   try {
     const res = await fetch('https://api.frankfurter.dev/v2/rates?base=XAU&quotes=KRW,USD');
+    const d = await res.json();
     const rates = {};
 if (Array.isArray(d)) { d.forEach(item => { rates[item.quote] = item.rate; }); }
 else if (d.rates) { Object.assign(rates, d.rates); }
