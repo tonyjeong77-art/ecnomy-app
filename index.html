@@ -286,9 +286,9 @@ function nowStr() {
 
 async function loadFX() {
   try {
-    const res = await fetch('https://api.frankfurter.app/latest?from=USD&to=KRW,JPY,EUR,CNY');
+    const res = await fetch('https://api.frankfurter.dev/v2/rates?base=USD&quotes=KRW,JPY,EUR,CNY');
     const d = await res.json();
-    const r = d.rates;
+    const r = Array.isArray(d) ? d[0].rates : d.rates;
     fxData = r;
 
     const rows = [
@@ -316,9 +316,9 @@ async function loadFX() {
 
 async function loadGold() {
   try {
-    const res = await fetch('https://api.frankfurter.app/latest?from=XAU&to=KRW,USD');
-    const d = await res.json();
-    const krw = d.rates.KRW, usd = d.rates.USD;
+    const res = await fetch('https://api.frankfurter.dev/v2/rates?base=XAU&quotes=KRW,USD');
+    const rates = Array.isArray(d) ? d[0].rates : d.rates;
+    const krw = rates.KRW, usd = rates.USD;
     goldData = {krw, usd};
 
     document.getElementById('gold-don').textContent = krw
