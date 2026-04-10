@@ -286,12 +286,16 @@ function nowStr() {
 
 async function loadFX() {
   try {
-    const res = await fetch('https://api.frankfurter.dev/v2/rates?base=USD&quotes=KRW,JPY,EUR,CNY');
-    const d = await res.json();
-    const r = {};
-if (Array.isArray(d)) { d.forEach(item => { r[item.quote] = item.rate; }); }
-else if (d.rates) { Object.assign(r, d.rates); }
-    fxData = r;
+const res = await fetch('https://v6.exchangerate-api.com/v6/bbd3b75c0f9c46892e59bc12/latest/USD');
+const d = await res.json();
+const r = {};
+if (d.result === 'success') {
+  r.KRW = d.conversion_rates.KRW;
+  r.JPY = d.conversion_rates.JPY;
+  r.EUR = d.conversion_rates.EUR;
+  r.CNY = d.conversion_rates.CNY;
+}
+fxData = r;
 
     const rows = [
       {name:'미국 달러', pair:'USD → KRW', val: r.KRW ? r.KRW.toFixed(0)+'원' : '-'},
