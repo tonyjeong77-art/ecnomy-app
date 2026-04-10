@@ -1,4 +1,4 @@
-const CACHE = 'economy-v2';
+const CACHE = 'economy-v3';
 const BASE = '/ecnomy-app/';
 const ASSETS = [BASE, BASE + 'index.html'];
 
