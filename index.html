@@ -322,9 +322,9 @@ fxData = r;
 
 async function loadGold() {
   try {
-const res = await fetch('https://api.metals.live/v1/spot/gold');
+const res = await fetch('https://data-asg.goldprice.org/dbXRates/USD');
 const d = await res.json();
-const usd = d[0]?.price;
+const usd = d.items[0]?.xauPrice;
 const krwRes = await fetch('https://v6.exchangerate-api.com/v6/bbd3b75c0f9c46892e59bc12/latest/USD');
 const krwData = await krwRes.json();
 const krwRate = krwData.conversion_rates.KRW;
